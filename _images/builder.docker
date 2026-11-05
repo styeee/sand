@@ -1,0 +1,7 @@
+ARG BASE=debian:12-slim
+FROM $BASE
+RUN apt-get update && apt-get install -y g++ cmake ninja-build libasio-dev libluajit-5.1-dev pkg-config
+COPY util/LuaJITConfig.cmake /libs/
+COPY util/asioConfig.cmake /libs/
+WORKDIR /src
+CMD ["sh","-c","cmake -B /build -G Ninja -DCMAKE_PREFIX_PATH=/libs && cmake --build /build && cmake --install /build --prefix /work"]
