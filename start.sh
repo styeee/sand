@@ -27,7 +27,8 @@ do
 		5) _actions/2tester.sh;;
 		6) _actions/3runner.sh;;
 		7) hostname -I;;
-		8) echo "port:" && read port && ncat 127.0.0.1 $port;;
+		#8) echo "port:" && read port && ncat 127.0.0.1 $port;;
+		8) ncat 127.0.0.1 55555;;
 		9) sudo docker stop $(sudo docker ps -q);;
 		10) read src_p && rm -rf src/* && rm -rf build/* && rm -rf work/* && cp -r $src_p src/;;
 		*) clear
