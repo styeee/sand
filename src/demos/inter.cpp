@@ -5,8 +5,6 @@
 
 int main(int argc,char** argv)
 {
-	setvbuf(stdout,nullptr,_IONBF,0);
-
 	inter i;
 	std::thread
 	(
@@ -18,7 +16,8 @@ int main(int argc,char** argv)
 	.detach();
 	
 	while(true)
-		if(!i.run());
+		if(!i.run())
+			timer::wait(.001);
 	
 	return 0;
 }
