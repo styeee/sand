@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.22)
 
-project(sand VERSION 0.3.2)
+project(sand VERSION 0.3.3)
 
 set(LUAJIT_USE_STATIC ON)
 find_package(LuaJIT REQUIRED)

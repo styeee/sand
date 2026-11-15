@@ -1,23 +1,6 @@
 import pytest
 import pexpect
 
-DEMO="/work/inter"
-
-@pytest.fixture
-def demo():
-	child=pexpect.spawn(DEMO)
-	yield child
-	child.close()
-
-def test_print(demo):
-	demo.sendline("print(1+1)")
-	demo.readline()
-	a=demo.readline()
-	assert a.strip()==b"2"
-
-import pytest
-import pexpect
-
 DEMO = "/work/inter"
 
 
@@ -47,3 +30,19 @@ def test_runtime_error(demo):
 	demo.readline()
 	a = demo.readline()
 	assert b"nil value" in a
+
+
+def test_util_function(demo):
+	demo.sendline("test_f()")
+	demo.readline()
+	a = demo.readline()
+	assert a.strip() == b"test"
+
+
+def test_util_class(demo):
+	demo.sendline("t=test_c(5)")
+	demo.readline()
+	demo.sendline("print(t:get())")
+	demo.readline()
+	a = demo.readline()
+	assert a.strip() == b"5"

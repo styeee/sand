@@ -9,6 +9,7 @@
 #include <lua.hpp>
 
 #include "lua/util.h"
+#include "lua/universe.h"
 
 class inter
 {
@@ -20,11 +21,19 @@ public:
 		lua(luaL_newstate())
 	{
 		setvbuf(stdout,nullptr,_IOLBF,0);//fix console out
+		
 		luaL_openlibs(lua);
+		
 		if(first)
 			luaL_dostring(lua,first);
+		
 		luaopen_util(lua);
-
+		
+		luaopen_universe(lua);
+		lua_getfield(lua,-1,"universe");
+		lua_setglobal(lua,"universe");
+		lua_pop(lua,1);
+		
 		//shall register new functional there...
 
 	}
@@ -89,5 +98,18 @@ public:
 		busy.unlock();
 		
 		return true;
+	}
+	
+	template<typename type>
+	bool shared(type& x, const char* name)
+	{
+#ifdef LUABRIDGE_VERSION
+		if(luabridge::push(lua,&x))
+		{
+			lua_setglobal(lua,name);
+			return true;
+		}
+#endif
+		return false;
 	}
 };
