@@ -79,7 +79,7 @@ public:
 		}
 		
 		luaL_loadbuffer(lua,buffer.front().data(),buffer.front().size(),"console");
-		if(!lua_pcall(lua,0,0,0))
+		if(lua_pcall(lua,0,0,0))
 		{
 			std::cout<<lua_tostring(lua,-1)<<std::endl;
 			lua_pop(lua,1);

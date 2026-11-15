@@ -25,7 +25,10 @@ public:
 		if(t%600)
 			return;
 		status=!status;
+	}
+	
+	void info()const
+	{
 		std::cout<<n<<':'<<(status?"day":"night")<<std::endl;
 	}
-
 };
