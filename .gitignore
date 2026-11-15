@@ -3,5 +3,3 @@ work/
 __pycache__/
 .pytest_cache/
 *.pyc
-
-src/demos/sand.cpp

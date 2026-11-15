@@ -9,6 +9,7 @@
 #include <lua.hpp>
 
 #include "lua/util.h"
+#include "lua/world.h"
 #include "lua/universe.h"
 
 class inter
@@ -28,6 +29,11 @@ public:
 			luaL_dostring(lua,first);
 		
 		luaopen_util(lua);
+
+		luaopen_world(lua);
+		lua_getfield(lua,-1,"world");
+		lua_setglobal(lua,"world");
+		lua_pop(lua,1);
 		
 		luaopen_universe(lua);
 		lua_getfield(lua,-1,"universe");
